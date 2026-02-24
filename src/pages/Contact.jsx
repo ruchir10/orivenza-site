@@ -4,7 +4,7 @@ export default function Contact() {
   const [status, setStatus] = useState('idle')
   const [errorMessage, setErrorMessage] = useState('')
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
-  const formspreeUrl = import.meta.env.VITE_FORMSPREE_URL?.trim()
+  const formspreeUrl = import.meta.env.VITE_FORMSPREE_URL?.trim() || 'https://formspree.io/f/xyzgkwkq'
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -15,11 +15,6 @@ export default function Contact() {
     e.preventDefault()
     setStatus('sending')
     setErrorMessage('')
-
-    if (!formspreeUrl) {
-      setStatus('config-error')
-      return
-    }
 
     try {
       const response = await fetch(formspreeUrl, {
@@ -101,11 +96,6 @@ export default function Contact() {
           {status === 'sent' && (
             <div className="status-message success">
               Thanks! Your message has been sent. We'll be in touch within 24 hours.
-            </div>
-          )}
-          {status === 'config-error' && (
-            <div className="status-message error">
-              Contact form is not configured yet. Please email <a href="mailto:info@orivenza.com">info@orivenza.com</a> directly.
             </div>
           )}
           {status === 'error' && (
