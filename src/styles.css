@@ -69,6 +69,11 @@ main{flex:1;width:100%}
 .testimonial-section h2{margin:0 0 14px 0}
 .testimonial-section blockquote{margin:0;color:#1e3a8a;font-size:1.1rem;font-weight:500}
 .testimonial-note{margin-top:10px;color:#64748b;font-size:0.9rem}
+.trial-section{margin:60px 0;padding:32px;border-radius:12px;background:linear-gradient(135deg,#f8fafc,#eef2ff);border:1px solid #dbeafe}
+.trial-section h2{margin:0 0 10px 0}
+.trial-section p{margin:0 0 16px 0;color:#475569}
+.trial-points{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.trial-points span{background:#e2e8f0;color:#1e293b;padding:7px 12px;border-radius:999px;font-size:0.82rem}
 .final-cta{margin:60px 0 20px 0;padding:36px;border-radius:12px;background:linear-gradient(135deg,#0f172a,#1e293b);color:#e2e8f0;text-align:center}
 .final-cta h2{margin:0 0 12px 0;color:#f8fafc}
 .final-cta p{margin:0 0 20px 0;color:#cbd5e1}

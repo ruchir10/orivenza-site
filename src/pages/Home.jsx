@@ -114,6 +114,17 @@ export default function Home() {
           </div>
         </div>
 
+        <div className="trial-section">
+          <h2>Try Our Product Free Once</h2>
+          <p>Start with a guided pilot at no cost to validate business impact before full rollout.</p>
+          <div className="trial-points">
+            <span>Free initial setup</span>
+            <span>Use-case specific demo</span>
+            <span>Architecture review included</span>
+          </div>
+          <Link to="/contact" className="btn">Request Free Trial</Link>
+        </div>
+
         <div className="final-cta">
           <h2>Planning an AI modernization initiative?</h2>
           <p>Book a focused strategy call and get a practical architecture blueprint for your first 90 days.</p>
