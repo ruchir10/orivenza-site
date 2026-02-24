@@ -78,9 +78,9 @@ main{flex:1;width:100%}
 /* About Page */
 .about-intro .lead{font-size:1.3rem;font-weight:600;color:var(--accent-start);margin:0 0 12px 0}
 .about-intro p{font-size:1.05rem;line-height:1.8;color:#4b5563}
-.about container h3{color:var(--accent-start);margin-top:40px}
-.about container ul{color:#4b5563}
-.about container li{margin:10px 0;line-height:1.7}
+.about h3{color:var(--accent-start);margin-top:40px}
+.about ul{color:#4b5563}
+.about li{margin:10px 0;line-height:1.7}
 
 /* Features grid */
 .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:32px}
