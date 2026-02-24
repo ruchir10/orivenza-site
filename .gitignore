@@ -3,3 +3,12 @@ dist/
 /.cache
 npm-debug.log
 env.local
+
+# Editor / OS
+.DS_Store
+
+# Environment files
+.env
+
+# Logs
+*.log

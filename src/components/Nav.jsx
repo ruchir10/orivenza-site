@@ -6,7 +6,7 @@ export default function Nav() {
     <header className="nav">
       <div className="nav-inner">
         <Link to="/" className="brand">
-          <img src="/logo.svg" alt="Orivenza logo" className="logo" />
+          <img src="/Orivenza.png" alt="Orivenza logo" className="logo" />
           <span className="brand-name">Orivenza</span>
         </Link>
         <nav className="links">
