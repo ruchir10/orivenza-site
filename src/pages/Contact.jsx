@@ -1,19 +1,8 @@
 import React, { useState } from 'react'
-import emailjs from '@emailjs/browser'
-
-// Initialize EmailJS with your public key
-// Sign up at https://www.emailjs.com/ and get your Service ID, Template ID, and Public Key
-const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_orivenza'
-const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_contact'
-const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || ''
-
-if (PUBLIC_KEY) {
-  emailjs.init(PUBLIC_KEY)
-}
 
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' })
   const [status, setStatus] = useState('idle')
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' })
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -22,25 +11,32 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    
-    if (!PUBLIC_KEY) {
-      setStatus('no-config')
-      return
-    }
-
     setStatus('sending')
+    
     try {
-      await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-        from_name: formData.name,
-        from_email: formData.email,
-        message: formData.message,
-        to_email: 'info@orivenza.com',
+      const response = await fetch('https://formspree.io/f/xyzgkwkq', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message
+        })
       })
-      setStatus('sent')
-      setFormData({ name: '', email: '', message: '' })
-      setTimeout(() => setStatus('idle'), 5000)
+
+      if (response.ok) {
+        setStatus('sent')
+        setFormData({ name: '', email: '', message: '' })
+        setTimeout(() => setStatus('idle'), 5000)
+      } else {
+        setStatus('error')
+        setTimeout(() => setStatus('idle'), 5000)
+      }
     } catch (err) {
-      console.error('Error sending email:', err)
+      console.error('Error sending form:', err)
       setStatus('error')
       setTimeout(() => setStatus('idle'), 5000)
     }
@@ -97,19 +93,14 @@ export default function Contact() {
           )}
           {status === 'error' && (
             <div className="status-message error">
-              ✗ Error sending message. Please try again or email info@orivenza.com directly.
-            </div>
-          )}
-          {status === 'no-config' && (
-            <div className="status-message info">
-              Form not configured. Please email <a href="mailto:info@orivenza.com">info@orivenza.com</a> directly.
+              ✗ Error sending message. Please email <a href="mailto:info@orivenza.com">info@orivenza.com</a> directly.
             </div>
           )}
         </div>
 
         <div className="contact-info">
           <h3>Direct Contact</h3>
-          <p>Or reach us directly at:</p>
+          <p>Or reach us directly:</p>
           <p><a href="mailto:info@orivenza.com" className="email-link">info@orivenza.com</a></p>
         </div>
       </div>
