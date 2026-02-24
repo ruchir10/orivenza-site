@@ -4,6 +4,7 @@ import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Home from './pages/Home'
 import About from './pages/About'
+import Solutions from './pages/Solutions'
 import Products from './pages/Products'
 import Blog from './pages/Blog'
 import Contact from './pages/Contact'
@@ -15,6 +16,7 @@ export default function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/solutions" element={<Solutions />} />
           <Route path="/about" element={<About />} />
           <Route path="/products" element={<Products />} />
           <Route path="/blog" element={<Blog />} />
