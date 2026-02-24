@@ -1,0 +1,58 @@
+﻿node.exe : npm verbose cli C:\Program 
+Files\nodejs\node.exe C:\Program 
+Files\nodejs\node_modules\npm\bin\npm-cli.js
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" 
+"C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (npm 
+    verbose cli...\bin\npm-cli.js:String) [], R  
+  emoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+npm info using npm@11.6.2
+npm info using node@v24.13.0
+npm verbose title npm install
+npm verbose argv "install" "--loglevel" "verbose"
+npm verbose logfile logs-max:10 dir:C:\Users\Ruch
+irChincholkar\AppData\Local\npm-cache\_logs\2026-
+02-24T10_56_50_959Z-
+npm verbose logfile C:\Users\RuchirChincholkar\Ap
+pData\Local\npm-cache\_logs\2026-02-24T10_56_50_9
+59Z-debug-0.log
+npm http fetch POST 200 https://registry.npmjs.or
+g/-/npm/v1/security/advisories/bulk 390ms
+npm http cache 
+https://registry.npmjs.org/minimatch 14ms (cache 
+hit)
+npm http cache 
+https://registry.npmjs.org/esbuild 19ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/vite 
+11ms (cache hit)
+npm http cache https://registry.npmjs.org/glob 
+6ms (cache hit)
+npm http cache https://registry.npmjs.org/globby 
+6ms (cache hit)
+npm http cache 
+https://registry.npmjs.org/gh-pages 6ms (cache 
+hit)
+
+up to date, audited 62 packages in 1s
+
+8 packages are looking for funding
+  run `npm fund` for details
+
+6 vulnerabilities (2 moderate, 4 high)
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+npm verbose cwd C:\workspace\orivenza-site
+npm verbose os Windows_NT 10.0.26200
+npm verbose node v24.13.0
+npm verbose npm  v11.6.2
+npm verbose exit 0
+npm info ok
