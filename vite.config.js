@@ -4,5 +4,5 @@ import { defineConfig } from 'vite'
 // Example: VITE_BASE='/my-repo/' for GitHub Pages project pages.
 export default defineConfig(({ mode }) => ({
   root: '.',
-  base: process.env.VITE_BASE || '/',
+  base: process.env.VITE_BASE || '/orivenza-site/',
 }))
