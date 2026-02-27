@@ -1,13 +1,14 @@
-﻿import React, { useEffect } from 'react'
+import React, { lazy, Suspense, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Home from './pages/Home'
-import About from './pages/About'
-import Solutions from './pages/Solutions'
-import Products from './pages/Products'
-import Blog from './pages/Blog'
-import Contact from './pages/Contact'
+
+const About = lazy(() => import('./pages/About'))
+const Solutions = lazy(() => import('./pages/Solutions'))
+const Products = lazy(() => import('./pages/Products'))
+const Blog = lazy(() => import('./pages/Blog'))
+const Contact = lazy(() => import('./pages/Contact'))
 
 const ROUTE_SEO = {
   '/': {
@@ -85,14 +86,16 @@ export default function App() {
     <div className="app">
       <Nav />
       <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/solutions" element={<Solutions />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+        <Suspense fallback={<div className="route-loading">Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/solutions" element={<Solutions />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </Suspense>
       </main>
       <Footer />
     </div>
