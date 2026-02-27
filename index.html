@@ -21,6 +21,24 @@
     <meta name="twitter:image" content="https://www.orivenza.com/Orivenza.png" />
     <link rel="canonical" href="https://www.orivenza.com/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <style>
+      :root{--bg:#f6f7fb;--text:#1f2940;--accent-start:#2bb7ff;--accent-end:#6a56ff}
+      *{box-sizing:border-box}
+      html,body,#root{height:100%;margin:0;padding:0}
+      body{font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+      #root{display:flex;flex-direction:column}
+      .app{display:flex;flex-direction:column;min-height:100vh}
+      main{flex:1;width:100%}
+      .nav{background:linear-gradient(90deg,var(--accent-start),var(--accent-end));padding:14px 0;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+      .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 20px}
+      .links{display:flex;gap:8px;align-items:center}
+      .links a{padding:8px 14px;color:rgba(255,255,255,.95);text-decoration:none;border-radius:6px}
+      .hero{padding:80px 20px;background:linear-gradient(135deg,rgba(43,183,255,.05),rgba(106,86,255,.05))}
+      .hero-inner{max-width:1200px;margin:0 auto}
+      .hero-headline{font-size:3.2rem;margin:0 0 20px 0;line-height:1.2}
+      .subtitle{margin:0;max-width:700px}
+      @media(max-width:760px){.hero{padding:60px 20px}.hero-headline{font-size:2.2rem}.links{gap:4px;flex-wrap:wrap}.links a{padding:6px 10px;font-size:.85rem}}
+    </style>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
