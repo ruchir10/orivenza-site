@@ -2,6 +2,7 @@ import React, { lazy, Suspense, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
+import ScrollProgress from './components/ScrollProgress'
 import Home from './pages/Home'
 
 const About = lazy(() => import('./pages/About'))
@@ -12,14 +13,29 @@ const Contact = lazy(() => import('./pages/Contact'))
 
 const ROUTE_SEO = {
   '/': {
-    title: 'Orivenza Official Site | AI Infrastructure for Critical Systems',
+    title: 'Orivenza | AI Infrastructure for Compliance & Critical Systems',
     description:
-      'Official website of Orivenza (orivenza.com). Secure AI infrastructure for migration systems, healthcare networks, and financial compliance platforms.'
+      'Orivenza builds AI-powered infrastructure for migration systems, healthcare networks, and tax and compliance platforms. Secure, scalable, deployment-ready architecture.'
   },
   '/solutions': {
     title: 'AI Solutions | Orivenza',
     description:
       'Explore Orivenza AI solutions for migration systems, healthcare infrastructure, tax and compliance, and enterprise deployment.'
+  },
+  '/solutions/tax-compliance': {
+    title: 'Tax and Compliance AI Infrastructure | Orivenza',
+    description:
+      'Enterprise-grade AI systems for GST automation, regulatory workflows, audit traceability, and financial compliance at scale.'
+  },
+  '/solutions/migration': {
+    title: 'Migration AI Infrastructure | Orivenza',
+    description:
+      'AI infrastructure for identity workflows, migration case systems, and national-scale secure public-service modernization.'
+  },
+  '/solutions/healthcare': {
+    title: 'Healthcare AI Infrastructure | Orivenza',
+    description:
+      'Security-first healthcare AI infrastructure for operational intelligence, interoperability, and reliable patient-service delivery.'
   },
   '/products': {
     title: 'Products and Industry Platforms | Orivenza',
@@ -74,6 +90,13 @@ export default function App() {
 
     document.title = pageSeo.title
     upsertMeta("meta[name='description']", 'name', 'description', pageSeo.description)
+    upsertMeta(
+      "meta[name='keywords']",
+      'name',
+      'keywords',
+      'AI infrastructure India, GST compliance systems, AI for tax automation, compliance technology, enterprise AI architecture'
+    )
+    upsertMeta("meta[name='author']", 'name', 'author', 'Orivenza')
     upsertMeta("meta[property='og:title']", 'property', 'og:title', pageSeo.title)
     upsertMeta("meta[property='og:description']", 'property', 'og:description', pageSeo.description)
     upsertMeta("meta[property='og:url']", 'property', 'og:url', canonicalUrl)
@@ -84,12 +107,16 @@ export default function App() {
 
   return (
     <div className="app">
+      <ScrollProgress />
       <Nav />
       <main>
         <Suspense fallback={<div className="route-loading">Loading...</div>}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/solutions" element={<Solutions />} />
+            <Route path="/solutions/tax-compliance" element={<Solutions />} />
+            <Route path="/solutions/migration" element={<Solutions />} />
+            <Route path="/solutions/healthcare" element={<Solutions />} />
             <Route path="/about" element={<About />} />
             <Route path="/products" element={<Products />} />
             <Route path="/blog" element={<Blog />} />
