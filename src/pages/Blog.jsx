@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 
 const posts = [
   {
@@ -18,7 +18,7 @@ const posts = [
     title: 'Cost Optimization in Cloud Infrastructure',
     date: 'Feb 15, 2026',
     excerpt: 'Techniques and tools for reducing your cloud spend by 40%+.'
-  },
+  }
 ]
 
 export default function Blog() {
@@ -27,15 +27,16 @@ export default function Blog() {
       <h1>Blog</h1>
       <p>Cloud engineering insights and best practices from the Orivenza team.</p>
       <div className="blog-list">
-        {posts.map(post => (
+        {posts.map((post) => (
           <article key={post.id} className="blog-post">
             <h3>{post.title}</h3>
             <time>{post.date}</time>
             <p>{post.excerpt}</p>
-            <a href="#">Read more →</a>
+            <a href="#">Read more -&gt;</a>
           </article>
         ))}
       </div>
     </section>
   )
 }
+
