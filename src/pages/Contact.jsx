@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { CONTACT_EMAIL, CONTACT_MAILTO } from '../config/contact'
 
 export default function Contact() {
   const [status, setStatus] = useState('idle')
@@ -13,8 +14,20 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
     setStatus('sending')
     setErrorMessage('')
+
+    const name = formData.name.trim()
+    const email = formData.email.trim()
+    const message = formData.message.trim()
+
+    if (!name || !email || !message) {
+      setStatus('error')
+      setErrorMessage('Please fill out all fields before sending.')
+      setTimeout(() => setStatus('idle'), 5000)
+      return
+    }
 
     try {
       const response = await fetch(formspreeUrl, {
@@ -24,9 +37,11 @@ export default function Contact() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message
+          name,
+          email,
+          _replyto: email,
+          message,
+          _subject: `New Orivenza inquiry from ${name}`
         })
       })
 
@@ -100,7 +115,7 @@ export default function Contact() {
           )}
           {status === 'error' && (
             <div className="status-message error">
-              Error sending message{errorMessage ? `: ${errorMessage}` : '.'} Please email <a href="mailto:info@orivenza.com">info@orivenza.com</a> directly.
+              Error sending message{errorMessage ? `: ${errorMessage}` : '.'} Please email <a href={CONTACT_MAILTO}>{CONTACT_EMAIL}</a> directly.
             </div>
           )}
         </div>
@@ -108,7 +123,7 @@ export default function Contact() {
         <div className="contact-info">
           <h3>Direct Contact</h3>
           <p>Or reach us directly:</p>
-          <p><a href="mailto:info@orivenza.com" className="email-link">info@orivenza.com</a></p>
+          <p><a href={CONTACT_MAILTO} className="email-link">{CONTACT_EMAIL}</a></p>
         </div>
       </div>
     </section>

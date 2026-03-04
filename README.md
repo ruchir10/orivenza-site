@@ -74,6 +74,9 @@ Create a `.env` file in the project root (copy from `.env.example`):
 # Formspree contact form endpoint
 VITE_FORMSPREE_URL=https://formspree.io/f/<your-form-id>
 
+# Contact mailbox used in UI fallback links
+VITE_CONTACT_EMAIL=get.info@orivenza.com
+
 # Base path (for subpath hosting; only needed if not using a custom domain)
 # VITE_BASE=/orivenza-site/
 ```
@@ -91,7 +94,8 @@ The contact form (`src/pages/Contact.jsx`) submits to a Formspree endpoint. To e
 1. Go to [formspree.io](https://formspree.io) and create a new form
 2. Copy the form endpoint (e.g., `https://formspree.io/f/abc123`)
 3. Set `VITE_FORMSPREE_URL` in your `.env` file
-4. Rebuild and deploy
+4. Optionally set `VITE_CONTACT_EMAIL` (defaults to `get.info@orivenza.com`)
+5. Rebuild and deploy
 
 ## Project Structure
 

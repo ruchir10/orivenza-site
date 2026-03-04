@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { CONTACT_EMAIL, CONTACT_MAILTO } from '../config/contact'
 
 export default function Footer() {
   return (
@@ -9,7 +10,7 @@ export default function Footer() {
         <div className="footer-links">
           <Link to="/about">About</Link>
           <Link to="/contact">Contact</Link>
-          <a href="mailto:info@orivenza.com">info@orivenza.com</a>
+          <a href={CONTACT_MAILTO}>{CONTACT_EMAIL}</a>
         </div>
       </div>
     </footer>
