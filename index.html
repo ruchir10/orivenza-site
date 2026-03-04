@@ -21,20 +21,18 @@
     <!-- Security Headers -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta
-      http-equiv="Content-Security-Policy"
-      content="
-        default-src 'self';
-        img-src 'self' data: https:;
-        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-        font-src 'self' https://fonts.gstatic.com;
-        script-src 'self' 'unsafe-inline';
-        connect-src 'self' https://orivenza-mail.ruchir031198.workers.dev;
-        object-src 'none';
-        base-uri 'self';
-        frame-ancestors 'none';
-        form-action 'self';
-        upgrade-insecure-requests;
-      "
+    http-equiv="Content-Security-Policy"
+    content="
+    default-src 'self';
+    img-src 'self' data: https:;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com;
+    connect-src 'self' https://orivenza-mail.ruchir031198.workers.dev https://static.cloudflareinsights.com;
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+    upgrade-insecure-requests;"
     />
 
     <!-- Open Graph -->
