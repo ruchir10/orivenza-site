@@ -129,3 +129,5 @@ export default function Contact() {
     </section>
   )
 }
+
+//added formspreeUrl variable to easily switch between different endpoints for form submission.
