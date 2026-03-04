@@ -5,7 +5,7 @@ export default function Contact() {
   const [status, setStatus] = useState('idle')
   const [errorMessage, setErrorMessage] = useState('')
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
-  const formspreeUrl = import.meta.env.VITE_FORMSPREE_URL?.trim() || 'https://formspree.io/f/xyzgkwkq'
+  const formspreeUrl = "orivenza-site.ruchir031198.workers.dev"
 
   const handleChange = (e) => {
     const { name, value } = e.target
