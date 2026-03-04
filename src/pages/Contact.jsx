@@ -5,7 +5,7 @@ export default function Contact() {
   const [status, setStatus] = useState('idle')
   const [errorMessage, setErrorMessage] = useState('')
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
-  const formspreeUrl = "https://orivenza-site.ruchir031198.workers.dev";
+  const formspreeUrl = "https://orivenza-mail.ruchir031198.workers.dev";
 
   const handleChange = (e) => {
     const { name, value } = e.target
