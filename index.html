@@ -3,7 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Orivenza | AI Infrastructure for Compliance & Critical Systems</title>
+
     <meta
       name="description"
       content="Orivenza builds AI-powered infrastructure for migration systems, healthcare networks, and tax & compliance platforms. Secure, scalable, deployment-ready architecture."
@@ -13,23 +15,29 @@
       content="AI infrastructure India, GST compliance systems, AI for tax automation, compliance technology, enterprise AI architecture"
     />
     <meta name="author" content="Orivenza" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="robots" content="index, follow" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <!-- Security Headers -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta
-    http-equiv="Content-Security-Policy"
-    content="default-src 'self';
-           img-src 'self' data: https:;
-           style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-           font-src 'self' https://fonts.gstatic.com;
-           script-src 'self' 'unsafe-inline';
-           connect-src 'self' https://orivenza-mail.ruchir031198.workers.dev;
-           object-src 'none';
-           base-uri 'self';
-           frame-ancestors 'none';
-           form-action 'self';
-           upgrade-insecure-requests;"
-           />
+      http-equiv="Content-Security-Policy"
+      content="
+        default-src 'self';
+        img-src 'self' data: https:;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        font-src 'self' https://fonts.gstatic.com;
+        script-src 'self' 'unsafe-inline';
+        connect-src 'self' https://orivenza-mail.ruchir031198.workers.dev;
+        object-src 'none';
+        base-uri 'self';
+        frame-ancestors 'none';
+        form-action 'self';
+        upgrade-insecure-requests;
+      "
+    />
+
+    <!-- Open Graph -->
     <meta property="og:title" content="Orivenza - AI Infrastructure for Critical Systems" />
     <meta
       property="og:description"
@@ -39,6 +47,8 @@
     <meta property="og:site_name" content="Orivenza" />
     <meta property="og:image" content="https://www.orivenza.com/Orivenza.png" />
     <meta property="og:url" content="https://www.orivenza.com/" />
+
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Orivenza - AI Infrastructure for Critical Systems" />
     <meta
@@ -46,8 +56,11 @@
       content="Security-first AI architecture for regulated industries including tax, compliance, and healthcare."
     />
     <meta name="twitter:image" content="https://www.orivenza.com/Orivenza.png" />
+
     <link rel="canonical" href="https://www.orivenza.com/" />
     <link rel="icon" type="image/png" href="/Orivenza.png" />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -55,6 +68,7 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
     />
 
+    <!-- Structured Data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -63,10 +77,11 @@
         "url": "https://www.orivenza.com/",
         "logo": "https://www.orivenza.com/Orivenza.png",
         "description": "AI-powered infrastructure company for migration, healthcare, and tax and compliance ecosystems.",
-        "email": "get.info@orivenza.com",
-        "sameAs": ["https://www.orivenza.com/"]
+        "email": "get.info@orivenza.com"
       }
     </script>
+
+    <!-- SPA Redirect Fix -->
     <script>
       (function () {
         var query = window.location.search
@@ -84,6 +99,7 @@
       })()
     </script>
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
