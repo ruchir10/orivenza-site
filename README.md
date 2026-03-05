@@ -74,6 +74,9 @@ Create a `.env` file in the project root (copy from `.env.example`):
 # Contact API endpoint (Cloudflare Worker or any relay endpoint)
 VITE_CONTACT_ENDPOINT=https://orivenza-mail.<your-subdomain>.workers.dev
 
+# GST one-file demo endpoint (Cloudflare Worker)
+VITE_GST_DEMO_ENDPOINT=https://gst-demo-worker.<your-subdomain>.workers.dev
+
 # Contact mailbox used in UI fallback links
 VITE_CONTACT_EMAIL=get.info@orivenza.com
 
@@ -96,6 +99,16 @@ The contact form (`src/pages/Contact.jsx`) submits to a configurable endpoint (C
 3. Set `VITE_CONTACT_ENDPOINT` in your `.env` file
 4. Optionally set `VITE_CONTACT_EMAIL` (defaults to `get.info@orivenza.com`)
 5. Rebuild and deploy
+
+### GST Demo Backend Enforcement
+
+The GST demo page (`src/pages/GstDemo.jsx`) expects a secure backend endpoint in `VITE_GST_DEMO_ENDPOINT`.
+Use the Worker template in [`worker/`](worker/) to enforce:
+
+1. Exactly one uploaded file
+2. Exactly one question
+3. One successful demo per day (rate-limited via KV)
+4. API keys and prompts only on backend
 
 ## Project Structure
 

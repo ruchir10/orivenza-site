@@ -191,11 +191,14 @@ export default function Home() {
         </section>
 
         <section className="trial-section" aria-labelledby="trial-title">
-          <h2 id="trial-title">Try Our Product Free Once</h2>
-          <p>Start with a guided pilot at no cost to validate business impact before full rollout.</p>
+          <h2 id="trial-title">Try GST-AI-Compliance Demo</h2>
+          <p>
+            Take a guided product tour with a strict demo limit: upload only one file and ask one
+            question.
+          </p>
           <div className="trial-points">
             <span>Free initial setup</span>
-            <span>Use-case specific demo</span>
+            <span>One-file demo access</span>
             <span>Architecture review included</span>
           </div>
           <div className="trial-actions">
@@ -203,7 +206,7 @@ export default function Home() {
               Request Free Trial
             </Link>
             <Link to="/gst-demo" className="btn ghost">
-              Take Tour
+              Take 1-File Tour
             </Link>
           </div>
         </section>

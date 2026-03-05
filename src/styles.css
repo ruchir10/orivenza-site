@@ -614,6 +614,57 @@ main {
   font-size: 0.82rem;
 }
 
+.trial-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.demo-form fieldset {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  display: grid;
+  gap: 14px;
+  margin: 18px 0;
+}
+
+.demo-form label {
+  display: grid;
+  gap: 8px;
+  color: #334155;
+  font-weight: 600;
+  font-size: 0.94rem;
+}
+
+.demo-form input,
+.demo-form textarea {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font: inherit;
+}
+
+.demo-answer {
+  margin-top: 18px;
+  padding: 18px;
+  border: 1px solid #dbeafe;
+  border-radius: 12px;
+  background: #eff6ff;
+}
+
+.demo-answer h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+
+.demo-note {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
 .final-cta {
   margin: 60px 0 20px 0;
   padding: 36px;
@@ -1055,6 +1106,11 @@ main {
   }
 
   .hero-cta .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .trial-actions .btn {
     width: 100%;
     text-align: center;
   }

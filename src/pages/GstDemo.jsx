@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 const MAX_FILE_SIZE_MB = 10
+const DEMO_ENDPOINT = import.meta.env.VITE_GST_DEMO_ENDPOINT
 
 export default function GstDemo() {
   const [file, setFile] = useState(null)
@@ -29,9 +30,7 @@ export default function GstDemo() {
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    if (status === 'answered') {
-      return
-    }
+    if (status === 'answered') return
 
     if (!file || !question.trim()) {
       setError('Please upload one document and enter your question.')
@@ -42,12 +41,18 @@ export default function GstDemo() {
     setError('')
     setAnswer('')
 
+    if (!DEMO_ENDPOINT) {
+      setStatus('error')
+      setError('Demo endpoint is not configured. Please contact support.')
+      return
+    }
+
     try {
       const formData = new FormData()
       formData.append('file', file)
       formData.append('question', question.trim())
 
-      const response = await fetch(import.meta.env.VITE_GST_DEMO_ENDPOINT, {
+      const response = await fetch(DEMO_ENDPOINT, {
         method: 'POST',
         body: formData
       })
@@ -72,11 +77,12 @@ export default function GstDemo() {
 
   return (
     <section className="page container">
-      <h1>GST Compliance AI Tour</h1>
+      <h1>GST-AI-Compliance Demo Tour</h1>
       <p>
-        Upload one GST or compliance document and ask a single question to experience how Orivenza&apos;s
-        AI can understand filings, notices, and records.
+        This is a controlled demo of GST-AI-Compliance (private product). Upload exactly one GST or
+        compliance document and ask one question.
       </p>
+      <p className="muted">Demo rule: one file + one question + one response per session.</p>
 
       <form className="demo-form" onSubmit={handleSubmit}>
         <fieldset disabled={status === 'sending' || hasUsedDemo}>
@@ -100,7 +106,7 @@ export default function GstDemo() {
           </label>
 
           <button type="submit" className="btn" disabled={status === 'sending' || hasUsedDemo}>
-            {status === 'sending' ? 'Processing…' : hasUsedDemo ? 'Tour Completed' : 'Run Demo'}
+            {status === 'sending' ? 'Processing...' : hasUsedDemo ? 'Tour Completed' : 'Run Demo'}
           </button>
         </fieldset>
       </form>
@@ -116,16 +122,11 @@ export default function GstDemo() {
           <h2>AI Answer</h2>
           <p>{answer}</p>
           <p className="demo-note">
-            This demo is limited to one document and one question per session. For production use-cases and
-            enterprise workflows,{' '}
-            <a href="/contact">
-              contact us
-            </a>
-            .
+            This demo is limited to one document and one question per session. For production use cases and
+            enterprise workflows, <a href="/contact">contact us</a>.
           </p>
         </div>
       )}
     </section>
   )
 }
-

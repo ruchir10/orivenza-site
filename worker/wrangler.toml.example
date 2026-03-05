@@ -1,0 +1,16 @@
+name = "gst-demo-worker"
+main = "gst-demo-worker.mjs"
+compatibility_date = "2026-03-05"
+
+[vars]
+# Comma-separated list of allowed frontend origins.
+ALLOWED_ORIGINS = "https://www.orivenza.com,https://orivenza.com,http://localhost:5173"
+
+# Secret values should be set with `wrangler secret put`.
+# RATE_LIMIT_SALT
+# UPSTREAM_AI_KEY
+
+[[kv_namespaces]]
+binding = "DEMO_LIMITS"
+id = "replace_with_kv_namespace_id"
+preview_id = "replace_with_preview_kv_namespace_id"
