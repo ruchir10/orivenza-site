@@ -8,7 +8,7 @@ This is the official website for **Orivenza** — a modern corporate single-page
 - 🛣️ Routing: React Router for seamless page navigation
 - 📱 Responsive: mobile-first design
 - 🎨 Modern styling: gradient UI with professional typography
-- 📧 Contact form: integrated with Formspree for submissions
+- 📧 Contact form: integrated with Cloudflare Worker + Resend relay
 - 🚀 Deployment-ready: GitHub Actions CI/CD to GitHub Pages
 - 🌐 Custom domain: supports www.orivenza.com via GitHub Pages CNAME
 
@@ -71,8 +71,8 @@ If you don't use a custom domain, remove `public/CNAME` and your site will be se
 Create a `.env` file in the project root (copy from `.env.example`):
 
 ```text
-# Formspree contact form endpoint
-VITE_FORMSPREE_URL=https://formspree.io/f/<your-form-id>
+# Contact API endpoint (Cloudflare Worker or any relay endpoint)
+VITE_CONTACT_ENDPOINT=https://orivenza-mail.<your-subdomain>.workers.dev
 
 # Contact mailbox used in UI fallback links
 VITE_CONTACT_EMAIL=get.info@orivenza.com
@@ -89,11 +89,11 @@ The app uses `public/logo.svg` (a default SVG placeholder). To replace it with y
 
 ### Contact Form
 
-The contact form (`src/pages/Contact.jsx`) submits to a Formspree endpoint. To enable submissions:
+The contact form (`src/pages/Contact.jsx`) submits to a configurable endpoint (Cloudflare Worker + Resend recommended). To enable submissions:
 
-1. Go to [formspree.io](https://formspree.io) and create a new form
-2. Copy the form endpoint (e.g., `https://formspree.io/f/abc123`)
-3. Set `VITE_FORMSPREE_URL` in your `.env` file
+1. Deploy your contact relay endpoint (for example, a Cloudflare Worker using Resend API)
+2. Copy the endpoint URL
+3. Set `VITE_CONTACT_ENDPOINT` in your `.env` file
 4. Optionally set `VITE_CONTACT_EMAIL` (defaults to `get.info@orivenza.com`)
 5. Rebuild and deploy
 
@@ -158,9 +158,9 @@ VITE_BASE=/orivenza-site/
 
 CI note: if you host on GitHub Pages under a project subpath, set `VITE_BASE` before the `npm run build` step (or edit `vite.config.js` directly).
 
-Form submissions (Formspree)
+Form submissions (Cloudflare Worker + Resend)
 
-This project supports Formspree for contact form handling. Create a Formspree form and set the full endpoint URL in `.env` as `VITE_FORMSPREE_URL=https://formspree.io/f/<your-id>`.
+This project supports endpoint-based contact form handling. Set your relay URL in `.env` as `VITE_CONTACT_ENDPOINT=https://orivenza-mail.<your-subdomain>.workers.dev`.
 
 Example `.env` values are shown in `.env.example`.
 

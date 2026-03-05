@@ -50,7 +50,7 @@ export default function Contact() {
         setTimeout(() => setStatus('idle'), 5000)
       } else {
         const data = await response.json().catch(() => ({}))
-        const firstError = data?.errors?.[0]?.message
+        const firstError = data?.errors?.[0]?.message || data?.message
         if (firstError) setErrorMessage(firstError)
         setStatus('error')
         setTimeout(() => setStatus('idle'), 5000)
@@ -123,11 +123,9 @@ export default function Contact() {
           <h3>Direct Contact</h3>
           <p>Or reach us directly:</p>
           <p><a href={CONTACT_MAILTO} className="email-link">{CONTACT_EMAIL}</a></p>
+          <p className="muted">Delivery route: Cloudflare Worker to Resend. Verify DNS auth if inbox delivery fails.</p>
         </div>
       </div>
     </section>
   )
 }
-
-//added formspreeUrl variable to easily switch between different endpoints for form submission.
-//re-updated
