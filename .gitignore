@@ -12,3 +12,6 @@ env.local
 
 # Logs
 *.log
+
+# Local duplicate repo copy (do not track in root repo)
+orivenza-site/
