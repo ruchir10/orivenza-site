@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import { CONTACT_EMAIL, CONTACT_MAILTO } from '../config/contact'
+import { CONTACT_EMAIL, CONTACT_MAILTO, CONTACT_ENDPOINT } from '../config/contact'
 
 export default function Contact() {
   const [status, setStatus] = useState('idle')
   const [errorMessage, setErrorMessage] = useState('')
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
-  const formspreeUrl = "https://orivenza-mail.ruchir031198.workers.dev";
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -30,7 +29,7 @@ export default function Contact() {
     }
 
     try {
-      const response = await fetch(formspreeUrl, {
+      const response = await fetch(CONTACT_ENDPOINT, {
         method: 'POST',
         headers: {
           Accept: 'application/json',

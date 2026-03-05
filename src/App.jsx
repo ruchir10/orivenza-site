@@ -10,6 +10,7 @@ const Solutions = lazy(() => import('./pages/Solutions'))
 const Products = lazy(() => import('./pages/Products'))
 const Blog = lazy(() => import('./pages/Blog'))
 const Contact = lazy(() => import('./pages/Contact'))
+const GstDemo = lazy(() => import('./pages/GstDemo'))
 
 const ROUTE_SEO = {
   '/': {
@@ -56,6 +57,11 @@ const ROUTE_SEO = {
     title: 'Contact Orivenza',
     description:
       'Contact Orivenza to discuss AI modernization, secure architecture planning, and mission-critical infrastructure deployment.'
+  },
+  '/gst-demo': {
+    title: 'GST AI Demo | Orivenza',
+    description:
+      'Experience Orivenza GST AI: upload one document and ask one question to see how AI can power tax and compliance workflows.'
   }
 }
 
@@ -121,6 +127,7 @@ export default function App() {
             <Route path="/products" element={<Products />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/gst-demo" element={<GstDemo />} />
           </Routes>
         </Suspense>
       </main>

@@ -198,9 +198,14 @@ export default function Home() {
             <span>Use-case specific demo</span>
             <span>Architecture review included</span>
           </div>
-          <Link to="/contact" className="btn">
-            Request Free Trial
-          </Link>
+          <div className="trial-actions">
+            <Link to="/contact" className="btn">
+              Request Free Trial
+            </Link>
+            <Link to="/gst-demo" className="btn ghost">
+              Take Tour
+            </Link>
+          </div>
         </section>
 
         <section className="final-cta" aria-labelledby="modernization-title">
