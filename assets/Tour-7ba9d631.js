@@ -1,0 +1,1 @@
+import{R as e}from"./index-4267a44b.js";function r(){return e.createElement("section",{className:"tour-page","aria-label":"GST AI product tour"},e.createElement("iframe",{className:"tour-iframe",src:"https://gst.orivenza.com/demo",title:"Orivenza GST AI Tour",loading:"eager",allow:"clipboard-write"}))}export{r as default};
