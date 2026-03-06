@@ -11,6 +11,7 @@ const Products = lazy(() => import('./pages/Products'))
 const Blog = lazy(() => import('./pages/Blog'))
 const Contact = lazy(() => import('./pages/Contact'))
 const GstDemo = lazy(() => import('./pages/GstDemo'))
+const Tour = lazy(() => import('./pages/Tour'))
 
 const ROUTE_SEO = {
   '/': {
@@ -62,6 +63,11 @@ const ROUTE_SEO = {
     title: 'GST AI Demo | Orivenza',
     description:
       'Experience Orivenza GST AI: upload one document and ask one question to see how AI can power tax and compliance workflows.'
+  },
+  '/tour': {
+    title: 'GST AI Tour | Orivenza',
+    description:
+      'Take the Orivenza GST AI product tour in an embedded full-screen experience.'
   }
 }
 
@@ -87,6 +93,7 @@ function upsertCanonical(url) {
 
 export default function App() {
   const location = useLocation()
+  const isTourRoute = location.pathname === '/tour'
 
   useEffect(() => {
     const siteUrl = 'https://www.orivenza.com'
@@ -111,11 +118,16 @@ export default function App() {
     upsertCanonical(canonicalUrl)
   }, [location.pathname])
 
+  useEffect(() => {
+    document.body.classList.toggle('tour-mode', isTourRoute)
+    return () => document.body.classList.remove('tour-mode')
+  }, [isTourRoute])
+
   return (
-    <div className="app">
-      <ScrollProgress />
-      <Nav />
-      <main>
+    <div className={`app ${isTourRoute ? 'tour-app' : ''}`}>
+      {!isTourRoute && <ScrollProgress />}
+      {!isTourRoute && <Nav />}
+      <main className={isTourRoute ? 'tour-main' : ''}>
         <Suspense fallback={<div className="route-loading">Loading...</div>}>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -128,10 +140,11 @@ export default function App() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/gst-demo" element={<GstDemo />} />
+            <Route path="/tour" element={<Tour />} />
           </Routes>
         </Suspense>
       </main>
-      <Footer />
+      {!isTourRoute && <Footer />}
     </div>
   )
 }

@@ -205,7 +205,7 @@ export default function Home() {
             <Link to="/contact" className="btn">
               Request Free Trial
             </Link>
-            <Link to="/gst-demo" className="btn ghost">
+            <Link to="/tour" className="btn ghost">
               Take 1-File Tour
             </Link>
           </div>
