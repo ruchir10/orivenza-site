@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
+import { GST_DEMO_ENDPOINT } from '../config/demo'
 
 const MAX_FILE_SIZE_MB = 10
-const DEMO_ENDPOINT = import.meta.env.VITE_GST_DEMO_ENDPOINT
 
 export default function GstDemo() {
   const [file, setFile] = useState(null)
@@ -41,18 +41,12 @@ export default function GstDemo() {
     setError('')
     setAnswer('')
 
-    if (!DEMO_ENDPOINT) {
-      setStatus('error')
-      setError('Demo endpoint is not configured. Please contact support.')
-      return
-    }
-
     try {
       const formData = new FormData()
       formData.append('file', file)
       formData.append('question', question.trim())
 
-      const response = await fetch(DEMO_ENDPOINT, {
+      const response = await fetch(GST_DEMO_ENDPOINT, {
         method: 'POST',
         body: formData
       })
