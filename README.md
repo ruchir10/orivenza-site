@@ -77,6 +77,9 @@ VITE_CONTACT_ENDPOINT=https://orivenza-mail.<your-subdomain>.workers.dev
 # GST one-file demo endpoint (Cloudflare Worker)
 VITE_GST_DEMO_ENDPOINT=https://gst-demo-worker.<your-subdomain>.workers.dev
 
+# Optional private compliance endpoint used by GST AI Chat
+VITE_GST_AI_COMPLIANCE_ENDPOINT=https://gst-ai.<your-domain>/analyze
+
 # Contact mailbox used in UI fallback links
 VITE_CONTACT_EMAIL=get.info@orivenza.com
 
@@ -103,6 +106,8 @@ The contact form (`src/pages/Contact.jsx`) submits to a configurable endpoint (C
 ### GST Demo Backend Enforcement
 
 The GST demo page (`src/pages/GstDemo.jsx`) expects a secure backend endpoint in `VITE_GST_DEMO_ENDPOINT`.
+The GST AI Chat page (`src/pages/Tour.jsx`) can use `VITE_GST_AI_COMPLIANCE_ENDPOINT` for private production inference,
+and falls back to the demo endpoint if compliance endpoint is not configured.
 Use the Worker template in [`worker/`](worker/) to enforce:
 
 1. Exactly one uploaded file

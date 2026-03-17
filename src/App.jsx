@@ -65,9 +65,14 @@ const ROUTE_SEO = {
       'Experience Orivenza GST AI: upload one document and ask one question to see how AI can power tax and compliance workflows.'
   },
   '/tour': {
-    title: 'GST AI Tour | Orivenza',
+    title: 'GST AI Chatbot | Orivenza',
     description:
-      'Take the Orivenza GST AI product tour in an embedded full-screen experience.'
+      'Use the Orivenza GST AI chatbot in a full-screen ChatGPT-style interface powered by our compliance demo architecture.'
+  },
+  '/gst-ai-chat': {
+    title: 'GST AI Chatbot | Orivenza',
+    description:
+      'Use the Orivenza GST AI chatbot in a full-screen ChatGPT-style interface powered by our compliance demo architecture.'
   }
 }
 
@@ -93,7 +98,7 @@ function upsertCanonical(url) {
 
 export default function App() {
   const location = useLocation()
-  const isTourRoute = location.pathname === '/tour'
+  const isTourRoute = location.pathname === '/tour' || location.pathname === '/gst-ai-chat'
 
   useEffect(() => {
     const siteUrl = 'https://www.orivenza.com'
@@ -141,6 +146,7 @@ export default function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/gst-demo" element={<GstDemo />} />
             <Route path="/tour" element={<Tour />} />
+            <Route path="/gst-ai-chat" element={<Tour />} />
           </Routes>
         </Suspense>
       </main>

@@ -193,7 +193,7 @@ export default function Home() {
         <section className="trial-section" aria-labelledby="trial-title">
           <h2 id="trial-title">Try GST-AI-Compliance Demo</h2>
           <p>
-            Take a guided product tour with a strict demo limit: upload only one file and ask one
+            Use a ChatGPT-style demo interface with strict controls: upload one file and ask one
             question.
           </p>
           <div className="trial-points">
@@ -205,8 +205,8 @@ export default function Home() {
             <Link to="/contact" className="btn">
               Request Free Trial
             </Link>
-            <Link to="/app" reloadDocument className="btn ghost">
-              Take 1-File Tour
+            <Link to="/gst-ai-chat" className="btn ghost">
+              Open GST AI Chatbot
             </Link>
           </div>
         </section>
