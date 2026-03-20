@@ -351,6 +351,40 @@ body.tour-mode {
   cursor: pointer;
 }
 
+.gst-embed-shell {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 12px;
+  min-height: calc(100dvh - 140px);
+  padding: 12px;
+}
+
+.gst-embed-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--gst-border-soft);
+  border-radius: 14px;
+  background: var(--gst-card-soft);
+}
+
+.gst-embed-toolbar p {
+  margin: 0;
+  color: var(--gst-muted-strong);
+  font-size: var(--gst-fs-sm);
+}
+
+.gst-embed-frame {
+  width: 100%;
+  min-height: 0;
+  height: 100%;
+  border: 1px solid var(--gst-border-soft);
+  border-radius: 18px;
+  background: #fff;
+}
+
 .gst-chat-history {
   padding: var(--gst-space-3);
   display: flex;

@@ -1,3 +1,3 @@
 # This CSP rule allows the marketing site tour page to embed the GST AI app from gst.orivenza.com.
 /tour
-Content-Security-Policy: default-src 'self'; frame-src 'self' https://gst.orivenza.com;
+Content-Security-Policy: default-src 'self'; frame-src 'self' https://gst.orivenza.com https://gst-ai-orivenza.pages.dev; connect-src 'self' https://orivenza-mail.ruchir031198.workers.dev https://gst-ai-orivenza-api.ruchir031198.workers.dev https://gst.orivenza.com https://gst-ai-orivenza.pages.dev https://static.cloudflareinsights.com;

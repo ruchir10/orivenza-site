@@ -1,5 +1,6 @@
 const MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024
 const MAX_QUESTION_LENGTH = 500
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export default {
   async fetch(request, env) {
@@ -19,20 +20,7 @@ export default {
       return json({ error: 'Content-Type must be multipart/form-data' }, 400, request, env.ALLOWED_ORIGINS)
     }
 
-    const clientIp = request.headers.get('CF-Connecting-IP') || 'unknown'
     const dayKey = new Date().toISOString().slice(0, 10)
-    const identity = await sha256(`${clientIp}:${dayKey}:${env.RATE_LIMIT_SALT || 'gst-demo'}`)
-    const rateKey = `gst-demo:${identity}`
-
-    const alreadyUsed = await env.DEMO_LIMITS.get(rateKey)
-    if (alreadyUsed) {
-      return json(
-        { error: 'Demo already used for this session/day. Try again tomorrow or contact sales.' },
-        429,
-        request,
-        env.ALLOWED_ORIGINS
-      )
-    }
 
     let formData
     try {
@@ -69,6 +57,25 @@ export default {
       return json({ error: `Question too long. Maximum ${MAX_QUESTION_LENGTH} characters.` }, 400, request, env.ALLOWED_ORIGINS)
     }
 
+    const email = String(formData.get('email') || '')
+      .trim()
+      .toLowerCase()
+    if (!EMAIL_PATTERN.test(email)) {
+      return json({ error: 'A valid email is required before demo access is granted.' }, 400, request, env.ALLOWED_ORIGINS)
+    }
+
+    const identity = await sha256(`${email}:${dayKey}:${env.RATE_LIMIT_SALT || 'gst-demo'}`)
+    const rateKey = `gst-demo:${identity}`
+    const alreadyUsed = await env.DEMO_LIMITS.get(rateKey)
+    if (alreadyUsed) {
+      return json(
+        { error: 'Demo already used for this email today. Try again tomorrow or contact sales.' },
+        429,
+        request,
+        env.ALLOWED_ORIGINS
+      )
+    }
+
     if (!env.UPSTREAM_AI_URL || !env.UPSTREAM_AI_KEY) {
       return json({ error: 'Worker not configured' }, 500, request, env.ALLOWED_ORIGINS)
     }
@@ -77,6 +84,7 @@ export default {
     forwardData.append('file', file, file.name)
     forwardData.append('question', question)
     forwardData.append('mode', 'gst-demo-one-file')
+    forwardData.append('email', email)
 
     let upstream
     try {
