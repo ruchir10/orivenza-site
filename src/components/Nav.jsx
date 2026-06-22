@@ -5,6 +5,7 @@ const navItems = [
   { label: 'Home', to: '/' },
   { label: 'Solutions', to: '/solutions' },
   { label: 'Industries', to: '/products' },
+  { label: 'Cloud Suite', to: '/cloud-transformation-suite' },
   { label: 'Research', to: '/blog' },
   { label: 'About', to: '/about' }
 ]

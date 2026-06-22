@@ -31,6 +31,15 @@ const solutions = [
     ]
   },
   {
+    id: 'cloud-transformation',
+    title: 'Cloud Transformation Advisory Suite',
+    description:
+      'Cloud migration, DR readiness, architecture assessment, cost optimization, database migration, and landing zone planning tools for technical leadership teams.',
+    points: ['Migration complexity scoring', 'DR strategy and scorecards', 'Executive transformation reporting'],
+    linkTo: '/cloud-transformation-suite',
+    linkLabel: 'Explore cloud suite'
+  },
+  {
     id: 'enterprise-deployment',
     title: 'Enterprise AI Deployment',
     description:

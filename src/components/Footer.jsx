@@ -9,6 +9,7 @@ export default function Footer() {
         <div>(c) {new Date().getFullYear()} Orivenza</div>
         <div className="footer-links">
           <Link to="/about">About</Link>
+          <Link to="/cloud-transformation-suite">Cloud Suite</Link>
           <Link to="/contact">Contact</Link>
           <a href={CONTACT_MAILTO}>{CONTACT_EMAIL}</a>
         </div>
