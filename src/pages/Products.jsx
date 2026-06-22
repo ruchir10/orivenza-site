@@ -1,6 +1,14 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const products = [
+  {
+    id: 0,
+    name: 'Cloud Transformation Suite',
+    desc: 'SaaS advisory platform for migration assessment, DR strategy, architecture review, cost optimization, database migration planning, and executive transformation reporting.',
+    features: ['Migration and DR planning', 'Architecture and cost reviews', 'PDF executive reports'],
+    linkTo: '/cloud-transformation-suite'
+  },
   {
     id: 1,
     name: 'CloudScale',
@@ -36,6 +44,11 @@ export default function Products() {
                 <li key={i}>{feat}</li>
               ))}
             </ul>
+            {prod.linkTo ? (
+              <Link className="card-inline-link" to={prod.linkTo}>
+                Explore platform
+              </Link>
+            ) : null}
           </div>
         ))}
       </div>

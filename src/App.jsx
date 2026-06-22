@@ -12,6 +12,7 @@ const Blog = lazy(() => import('./pages/Blog'))
 const Contact = lazy(() => import('./pages/Contact'))
 const GstDemo = lazy(() => import('./pages/GstDemo'))
 const Tour = lazy(() => import('./pages/Tour'))
+const CloudTransformationSuite = lazy(() => import('./pages/CloudTransformationSuite'))
 
 const ROUTE_SEO = {
   '/': {
@@ -43,6 +44,11 @@ const ROUTE_SEO = {
     title: 'Products and Industry Platforms | Orivenza',
     description:
       'Discover Orivenza products and cloud-native platforms designed for enterprise scale, security, and regulatory readiness.'
+  },
+  '/cloud-transformation-suite': {
+    title: 'Orivenza Cloud Transformation Suite | Cloud Migration, DR & Modernization',
+    description:
+      'Orivenza Cloud Transformation Suite helps CTOs, TPMs, Cloud Architects, and Engineering Managers assess migration complexity, DR readiness, cloud cost, database migration, infrastructure health, and modernization roadmaps.'
   },
   '/blog': {
     title: 'Research and Insights | Orivenza Blog',
@@ -142,6 +148,7 @@ export default function App() {
             <Route path="/solutions/healthcare" element={<Solutions />} />
             <Route path="/about" element={<About />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/cloud-transformation-suite" element={<CloudTransformationSuite />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/gst-demo" element={<GstDemo />} />

@@ -39,6 +39,13 @@ const solutionCards = [
     linkLabel: 'Explore tax and compliance'
   },
   {
+    title: 'Cloud Transformation Suite',
+    description:
+      'A SaaS advisory workspace for migration assessment, DR strategy, architecture review, cost optimization, landing zones, and executive transformation dashboards.',
+    linkTo: '/cloud-transformation-suite',
+    linkLabel: 'Explore cloud suite'
+  },
+  {
     title: 'Enterprise AI Deployment',
     description:
       'Cloud-native AI architecture, scaling, optimization, and governance for teams deploying AI at critical scale.'
@@ -187,6 +194,27 @@ export default function Home() {
               software. Orivenza exists to rebuild them with intelligence at the core, making public services
               more accessible, more efficient, and more humane.
             </p>
+          </div>
+        </section>
+
+        <section className="trial-section" aria-labelledby="cloud-suite-trial-title">
+          <h2 id="cloud-suite-trial-title">Cloud Transformation Suite</h2>
+          <p>
+            Assess migration complexity, disaster recovery readiness, cloud cost, database migration risk,
+            infrastructure health, and landing-zone design from one executive-ready platform.
+          </p>
+          <div className="trial-points">
+            <span>10 advisor modules</span>
+            <span>PDF and JSON exports</span>
+            <span>Dark-mode SaaS workspace</span>
+          </div>
+          <div className="trial-actions">
+            <Link to="/cloud-transformation-suite" className="btn">
+              Explore Cloud Suite
+            </Link>
+            <Link to="/contact" className="btn ghost">
+              Discuss Deployment
+            </Link>
           </div>
         </section>
 

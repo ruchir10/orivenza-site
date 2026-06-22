@@ -37,6 +37,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.orivenza.com/cloud-transformation-suite</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://www.orivenza.com/blog</loc>
     <lastmod>2026-02-27</lastmod>
     <changefreq>weekly</changefreq>
