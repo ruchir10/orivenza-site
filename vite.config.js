@@ -4,14 +4,14 @@ import { defineConfig, loadEnv } from 'vite'
 // Example: VITE_BASE='/my-repo/' for GitHub Pages project pages.
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
-  const remoteDemoEndpoint =
-    env.VITE_GST_DEMO_ENDPOINT ||
-    process.env.VITE_GST_DEMO_ENDPOINT ||
-    'https://gst-ai-orivenza-api.ruchir031198.workers.dev'
-  const proxyUrl = new URL(remoteDemoEndpoint)
-  const gstComplianceEndpoint = env.VITE_GST_AI_COMPLIANCE_ENDPOINT || process.env.VITE_GST_AI_COMPLIANCE_ENDPOINT || ''
-  const proxyConfig = {
-    '/api/gst-demo': {
+  const remoteDemoEndpoint = env.VITE_GST_DEMO_ENDPOINT || process.env.VITE_GST_DEMO_ENDPOINT || ''
+  const gstComplianceEndpoint =
+    env.VITE_GST_AI_COMPLIANCE_ENDPOINT || process.env.VITE_GST_AI_COMPLIANCE_ENDPOINT || 'https://api.orivenza.com'
+  const proxyConfig = {}
+
+  if (remoteDemoEndpoint) {
+    const proxyUrl = new URL(remoteDemoEndpoint)
+    proxyConfig['/api/gst-demo'] = {
       target: proxyUrl.origin,
       changeOrigin: true,
       secure: true,

@@ -62,17 +62,17 @@ const ROUTE_SEO = {
   '/gst-demo': {
     title: 'GST AI Demo | Orivenza',
     description:
-      'Experience Orivenza GST AI: upload one document and ask one question to see how AI can power tax and compliance workflows.'
+      'Request approved access to the Orivenza GST AI demo. Public demo execution is disabled and all sessions are provisioned after review.'
   },
   '/tour': {
     title: 'GST AI Chatbot | Orivenza',
     description:
-      'Use the Orivenza GST AI chatbot in a full-screen ChatGPT-style interface powered by our compliance demo architecture.'
+      'Request GST AI demo access from Orivenza. Approved sessions open through a controlled access flow backed by the production app.'
   },
   '/gst-ai-chat': {
     title: 'GST AI Chatbot | Orivenza',
     description:
-      'Use the Orivenza GST AI chatbot in a full-screen ChatGPT-style interface powered by our compliance demo architecture.'
+      'Request GST AI demo access from Orivenza. Approved sessions open through a controlled access flow backed by the production app.'
   }
 }
 

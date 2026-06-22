@@ -1,77 +1,92 @@
 import React, { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { DEMO_REQUEST_ENDPOINT } from '../config/contact'
 import { GST_REMOTE_APP_URL } from '../config/demo'
 
-const DEMO_STATE_KEY = 'gst_ai_demo_state_v2'
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
-const readDemoState = () => {
-  if (typeof window === 'undefined') return { email: '' }
-
-  try {
-    const raw = window.localStorage.getItem(DEMO_STATE_KEY)
-    if (!raw) return { email: '' }
-
-    const parsed = JSON.parse(raw)
-    return {
-      email: typeof parsed?.email === 'string' ? parsed.email : ''
-    }
-  } catch {
-    return { email: '' }
-  }
-}
-
-const persistDemoState = (state) => {
-  if (typeof window === 'undefined') return
-  window.localStorage.setItem(DEMO_STATE_KEY, JSON.stringify(state))
-}
-
-const clearDemoState = () => {
-  if (typeof window === 'undefined') return
-  window.localStorage.removeItem(DEMO_STATE_KEY)
-}
-
-const buildAppUrl = (email) => {
+const buildAppUrl = (search) => {
   const url = new URL(GST_REMOTE_APP_URL)
-  url.searchParams.set('embed', '1')
-  url.searchParams.set('source', 'orivenza-site')
+  const params = new URLSearchParams(search)
 
-  if (email) {
-    url.searchParams.set('demo_email', email)
+  params.set('embed', '1')
+  params.set('source', 'orivenza-site')
+  params.set('demo', '1')
+
+  for (const [key, value] of params.entries()) {
+    url.searchParams.set(key, value)
   }
 
   return url.toString()
 }
 
 export default function Tour() {
-  const initialDemoState = useMemo(() => readDemoState(), [])
-  const [signupEmail, setSignupEmail] = useState(initialDemoState.email)
-  const [demoEmail, setDemoEmail] = useState(initialDemoState.email)
-  const [signupError, setSignupError] = useState('')
-  const [isSignedIn, setIsSignedIn] = useState(Boolean(initialDemoState.email))
-  const appUrl = useMemo(() => buildAppUrl(demoEmail), [demoEmail])
+  const [status, setStatus] = useState('idle')
+  const [errorMessage, setErrorMessage] = useState('')
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    message: ''
+  })
 
-  const handleSignup = (event) => {
+  const search = typeof window === 'undefined' ? '' : window.location.search
+  const params = useMemo(() => new URLSearchParams(search), [search])
+  const hasApprovedAccess = Boolean(params.get('access_token')?.trim())
+  const appUrl = useMemo(() => buildAppUrl(search), [search])
+
+  const handleChange = (event) => {
+    const { name, value } = event.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    const normalizedEmail = signupEmail.trim().toLowerCase()
+    setStatus('sending')
+    setErrorMessage('')
 
-    if (!EMAIL_PATTERN.test(normalizedEmail)) {
-      setSignupError('Enter a valid email id to start GST AI access.')
+    const name = formData.name.trim()
+    const email = formData.email.trim()
+    const company = formData.company.trim()
+    const message = formData.message.trim()
+
+    if (!name || !email || !company) {
+      setStatus('error')
+      setErrorMessage('Name, work email, and company are required before requesting access.')
       return
     }
 
-    setSignupError('')
-    setDemoEmail(normalizedEmail)
-    setIsSignedIn(true)
-    persistDemoState({ email: normalizedEmail })
-  }
+    try {
+      const response = await fetch(DEMO_REQUEST_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          company,
+          requestType: 'gst_ai_demo',
+          source: 'orivenza-site-tour',
+          message:
+            message ||
+            `GST AI demo access requested by ${name} from ${company}. Please review and share an approved access link if qualified.`,
+          _replyto: email,
+          _subject: `GST AI demo request from ${company}`
+        })
+      })
 
-  const handleLogout = () => {
-    clearDemoState()
-    setDemoEmail('')
-    setSignupEmail('')
-    setSignupError('')
-    setIsSignedIn(false)
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}))
+        throw new Error(data?.errors?.[0]?.message || data?.message || 'Unable to submit the access request.')
+      }
+
+      setStatus('sent')
+      setFormData({ name: '', email: '', company: '', message: '' })
+    } catch (error) {
+      console.error('GST AI access request failed', error)
+      setStatus('error')
+      setErrorMessage(error.message || 'Unable to submit the access request right now.')
+    }
   }
 
   return (
@@ -87,65 +102,35 @@ export default function Tour() {
             <ul>
               <li>
                 <button type="button" className="gst-chat-menu-btn active" aria-current="page">
-                  GST AI Workspace
+                  Demo Access
                 </button>
               </li>
             </ul>
           </nav>
 
-          {isSignedIn ? (
-            <button type="button" className="gst-chat-side-logout" onClick={handleLogout}>
-              Logout
-            </button>
-          ) : (
-            <Link to="/" className="gst-chat-side-logout">
-              Back To Site
-            </Link>
-          )}
+          <Link to="/" className="gst-chat-side-logout">
+            Back To Site
+          </Link>
         </aside>
 
         <div className="gst-chat-content">
-          {!isSignedIn ? (
-            <section className="gst-chat-card gst-chat-signup-card">
-              <h2>Login To GST AI</h2>
-              <p>Use one email id per user. Backend access is limited to one successful demo submission per email and one file per request.</p>
-              <form className="gst-chat-signup-form" onSubmit={handleSignup}>
-                <label htmlFor="gst-demo-email">Email id</label>
-                <input
-                  id="gst-demo-email"
-                  type="email"
-                  value={signupEmail}
-                  onChange={(event) => setSignupEmail(event.target.value)}
-                  placeholder="name@company.com"
-                  required
-                />
-                <button type="submit" className="gst-chat-signup-btn">
-                  Open GST Workspace
-                </button>
-              </form>
-              {signupError && <p className="status-message error">{signupError}</p>}
-            </section>
-          ) : (
+          {hasApprovedAccess ? (
             <>
               <header className="gst-chat-card gst-chat-header">
                 <div className="gst-chat-heading">
-                  <h2>GST AI Workspace</h2>
-                  <p>Remote GST UI is mapped here from the dedicated worker deployment.</p>
-                  <span className="gst-chat-email-pill">{demoEmail}</span>
+                  <h2>GST AI Approved Demo</h2>
+                  <p>This session was opened from an approved Orivenza access link.</p>
                 </div>
                 <div className="gst-chat-header-actions">
                   <a className="gst-chat-ghost-btn" href={appUrl} target="_blank" rel="noreferrer">
                     Open In New Tab
                   </a>
-                  <button type="button" className="gst-chat-ghost-btn" onClick={handleLogout}>
-                    Logout
-                  </button>
                 </div>
               </header>
 
               <section className="gst-chat-card gst-embed-shell">
                 <div className="gst-embed-toolbar">
-                  <p>Signed in as {demoEmail}. The embedded GST app should use this identity when calling the API.</p>
+                  <p>Approved demo access is active for this browser session.</p>
                 </div>
                 <iframe
                   title="GST Orivenza"
@@ -156,6 +141,62 @@ export default function Tour() {
                 />
               </section>
             </>
+          ) : (
+            <section className="gst-chat-card gst-chat-signup-card">
+              <h2>Request GST AI Demo Access</h2>
+              <p>
+                Public demo execution is disabled. Submit a request here, and Orivenza will review it before sharing an
+                approved access link.
+              </p>
+
+              <form className="gst-chat-signup-form" onSubmit={handleSubmit}>
+                <label htmlFor="gst-demo-name">Full name</label>
+                <input id="gst-demo-name" name="name" type="text" value={formData.name} onChange={handleChange} required />
+
+                <label htmlFor="gst-demo-email">Work email</label>
+                <input
+                  id="gst-demo-email"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="name@company.com"
+                  required
+                />
+
+                <label htmlFor="gst-demo-company">Company</label>
+                <input
+                  id="gst-demo-company"
+                  name="company"
+                  type="text"
+                  value={formData.company}
+                  onChange={handleChange}
+                  placeholder="Company or firm name"
+                  required
+                />
+
+                <label htmlFor="gst-demo-message">Use case</label>
+                <textarea
+                  id="gst-demo-message"
+                  name="message"
+                  rows="4"
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Describe the GST workflow or problem you want to review in the demo."
+                />
+
+                <button type="submit" className="gst-chat-signup-btn" disabled={status === 'sending'}>
+                  {status === 'sending' ? 'Submitting...' : 'Request Demo Access'}
+                </button>
+              </form>
+
+              {status === 'sent' && (
+                <p className="status-message success">
+                  Request submitted. Orivenza will review it and share an approved access link if your demo is accepted.
+                </p>
+              )}
+              {status === 'error' && <p className="status-message error">{errorMessage}</p>}
+            </section>
           )}
         </div>
       </div>
